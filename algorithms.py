@@ -25,18 +25,22 @@ def grayscale(img):
     return filtered
 
 # Takes 3D array representing a 2D image and its RGB colors
-# and apply box blur filter on it (this version is actually 
-# psycholdelic, try on ur own images and you will see)
-def blurBox(img):
+# and apply box blur filter on it
+# kA --> kernelAmplitude
+# 1 --> -1 0 1
+# 3 --> -3 -2 -1 0 1 2 3
+# 5 --> -5 -4 -3 -2 -1 0 1 2 3 4 5
+# and so on...
+def blurBox(img, kA):
     filtered=img
-    for h in range(3,len(img)-3):
-        for w in range(3,len(img[h])-3):
+    for h in range(kA,len(img)-kA):
+        for w in range(kA,len(img[h])-kA):
             tR=tG=tB=0
-            for x in range(-3,3+1):
-                for y in range(-3,3+1):
+            for x in range(kA*-1,kA+1):
+                for y in range(kA*-1,kA+1):
                     kernelCell=img[x+h,y+w]
                     tR+=kernelCell[0]
                     tG+=kernelCell[1]
                     tB+=kernelCell[2]
-            filtered[h,w]=[tR/9,tG/9,tB/9]
+            filtered[h,w]=[tR/(((kA*2)+1)**2),tG/(((kA*2)+1)**2),tB/(((kA*2)+1)**2)]
     return filtered
