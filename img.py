@@ -10,7 +10,7 @@ shutil.rmtree(targetDirectory, ignore_errors=True)
 os.mkdir(targetDirectory)
 
 # retrieve original image
-originalImage=Image.open('test.jpg')
+originalImage=Image.open('gadsden.jpg')
 originalImageData=numpy.array(originalImage)
 
 #grayscale
