@@ -1,3 +1,15 @@
+# Takes array of 3 elements representing rgb colors
+# and transform to decimal
+def RGBtoDECIMAL(rgb):
+    return int('%02x%02x%02x' % tuple(rgb),16)
+
+# Takes decimal number between 0 and 16777215 representing a color
+# and transform to array of 3 elements with r,g and b
+def DECIMALtoRGB(decimal):
+    return [int(hex(decimal)[2:][i:i+2], 16) for i in (0, 2, 4)]
+
+# Takes 3D array representing a 2D image and its RGB colors
+# and apply grayscale filter on it
 def grayscale(img):
     filtered=img
     for h in range(len(img)):
@@ -12,12 +24,16 @@ def grayscale(img):
 
     return filtered
 
-# Takes array of 3 elements representing rgb colors
-# and transform to decimal
-def RGBtoDECIMAL(rgb):
-    return int('%02x%02x%02x' % tuple(rgb),16)
+# Takes 3D array representing a 2D image and its RGB colors
+# and apply box blur filter on it
+def blurBox(img):
+    filtered=img
+    for h in range(1,len(img)-1):
+        for w in range(1,len(img[h])-1):
+            s=0
+            for x in range(-1,1+1):
+                for y in range(-1,1+1):
+                    s+=RGBtoDECIMAL(img[(x+h+len(img))%len(img)][(y+w+len(img[h]))%len(img[h])])
+            filtered[h][w]=DECIMALtoRGB(s//9)
 
-# Takes decimal number between 0 and 16777215 representing a color
-# and transform to array of 3 elements with r,g and b
-def DECIMALtoRGB(decimal):
-    return [int(hex(decimal)[2:][i:i+2], 16) for i in (0, 2, 4)]
+    return filtered
