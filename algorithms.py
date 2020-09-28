@@ -1,3 +1,5 @@
+from numba import jit
+
 # Takes array of 3 elements representing rgb colors
 # and transform to decimal
 def RGBtoDECIMAL(rgb):
@@ -31,6 +33,7 @@ def grayscale(img):
 # 3 --> -3 -2 -1 0 1 2 3
 # 5 --> -5 -4 -3 -2 -1 0 1 2 3 4 5
 # and so on...
+@jit(nopython=True)
 def blurBox(img, kA):
     filtered=img
     for h in range(kA,len(img)-kA):

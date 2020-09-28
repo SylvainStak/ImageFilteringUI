@@ -18,6 +18,6 @@ originalImageData=numpy.array(originalImage)
 #imgGrayscale.save(targetDirectory+'grayscale.png')
 
 #blurbox
-for i in range(1,9,2):
+for i in range(1,30,2):
     imgBlurBox = Image.fromarray(blurBox(originalImageData, i))
     imgBlurBox.save(targetDirectory+'blurBox_'+str(i)+'.png')
