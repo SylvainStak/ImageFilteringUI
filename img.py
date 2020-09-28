@@ -17,7 +17,7 @@ originalImageData=numpy.array(originalImage)
 #imgGrayscale = Image.fromarray(grayscale(originalImageData))
 #imgGrayscale.save(targetDirectory+'grayscale.png')
 
+#use blurBox.py_func(...) to run with CPU so it turns off the execution with jit
 #blurbox
-for i in range(1,30,2):
-    imgBlurBox = Image.fromarray(blurBox(originalImageData, i))
-    imgBlurBox.save(targetDirectory+'blurBox_'+str(i)+'.png')
+imgBlurBox = Image.fromarray(blurBox(originalImageData, 1))
+imgBlurBox.save(targetDirectory+'blurBox.png')
